@@ -135,8 +135,6 @@ contract ERC20 is ERC20Interface, ERC20Options, Ownable {
    function _mint(address _account, uint256 _amount) internal {
       require(_account != 0);
       require(_totalSupply.add(_amount) <= maxSupply);
-      //Commenting out since I'm setting totalSupply here as a constant, but it also occurs to me that this is useful for minting down the line; maybe an initialSupply constant seperate from totalSupply, which accurately reflects present state of amount...? Though that is only if minting is something to be possible afterwards
-      //Actually scratch that will just check if amount to be added to totalSupply surpasses maxSupply
       _totalSupply = _totalSupply.add(_amount);      
       balances[_account] = balances[_account].add(_amount);
       emit Transfer(address(0), _account, _amount);
