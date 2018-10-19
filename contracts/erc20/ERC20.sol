@@ -9,7 +9,7 @@ contract ERC20 is ERC20Interface, ERC20Options, Ownable {
    //Allows us to bind SafeMath functions to a type, allowing us to call such functions on a value of that type, which automatically becomes added as the 1st param
    using SafeMath for uint256;
 
-   uint256 private _totalSupply = 0; 
+   uint256 private _totalSupply; 
    //Address balances and permissions to transferFrom contained in these mappings    
    //NOTE: Having balances and allowed here is sort of awkward, since we won't *really* need or use these mappings... one way to perhaps get around this is break up this contract into different pieces and just extend the ones excluding balances/allowed, but that sounds like overkill... hmmm.
    mapping (address => uint256) private balances;
