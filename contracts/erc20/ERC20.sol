@@ -2,7 +2,7 @@ pragma solidity ^0.4.25;
 import "../util/SafeMath.sol"; //SafeMath imported so as to ensure security of operations
 import "./ERC20Interface.sol";
 import "./ERC20Options.sol";
-import "./Ownable.sol";
+import "../util/Ownable.sol";
 
 contract ERC20 is ERC20Interface, ERC20Options, Ownable {
 
@@ -11,8 +11,9 @@ contract ERC20 is ERC20Interface, ERC20Options, Ownable {
 
    uint256 private _totalSupply = 0; 
    //Address balances and permissions to transferFrom contained in these mappings    
-   mapping (address => uint256) internal balances;
-   mapping (address => mapping (address => uint256)) internal allowed;
+   //NOTE: Having balances and allowed here is sort of awkward, since we won't *really* need or use these mappings... one way to perhaps get around this is break up this contract into different pieces and just extend the ones excluding balances/allowed, but that sounds like overkill... hmmm.
+   mapping (address => uint256) private balances;
+   mapping (address => mapping (address => uint256)) private allowed;
 
    /**
     * @dev Total number of tokens in existence
