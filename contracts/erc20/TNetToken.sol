@@ -53,6 +53,7 @@ contract TNetToken is ERC20 {
       return true;
    }
 
+
    function approve(address _spender, uint256 _value) public returns (bool) {
       require(_spender != address(0));
 
@@ -62,24 +63,40 @@ contract TNetToken is ERC20 {
       return true;
    }
 
+
    function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
       balanceFrom = TNetContainer.balanceOf(_from);
       balanceTo = TNetContainer.balanceOf(_to);
 
       require(_value <= balanceFrom);
       //require(_value <= allowed[_from][msg.sender]); I wonder if a contract can get a mapping...? It'd probably be too expensive
-      require(_value <= TNetContainer.allowed(_from, msg.sender);
+      require(_value <= TNetContainer.allowance(_from, msg.sender);
       require(_to != address(0));
 
       TNetContainer.setBalanceOf(_from, balanceFrom.sub(_value));
       TNetContainer.setBalanceOf(_to, balanceTo.add(_value);
-      TNetContainer.setAllowed(_from, msg.sender, TNetContainer.allowed(_from, msg.sender).sub(_value);
+      TNetContainer.setAllowed(_from, msg.sender, TNetContainer.allowance(_from, msg.sender).sub(_value);
       emit Transfer(_from, _to, _value);
       return true;
    }
 
 
+   function increaseAllowance(address _spender, uint256 _addedValue) public returns (bool) {
+      require(_spender != address(0));
 
+      TNetContainer.setAllowance(msg.sender, _spender, TNetContainer.allowance(msg.sender, _spender).add(_addedValue)));
+      emit Approval(msg.sender, _spender, TNetContainer.allowance(msg.sender, _spender));
+      return true;
+   }
+
+
+   function decreaseAllowance(address _spender, uint256 _subtractedValue) public returns (bool) {
+      require(_spender != address(0));
+
+      TNetContainer.setAllowance(msg.sender, _spender, (TNetContainer.allowance(msg.sender, _spender).sub(_subtractedValue));
+      emit Approval(msg.sender, _spender, TNetContainer.allowance(msg.sender, _spender);
+      return true;
+   }
 
 
 
