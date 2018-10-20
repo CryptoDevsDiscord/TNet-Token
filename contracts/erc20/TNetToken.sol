@@ -99,8 +99,24 @@ contract TNetToken is ERC20 {
    }
 
 
+   function _mint(address _account, uint256 _amount) internal {
+      require(_account != 0);
+      require(totalSupply().add(_amount) <= maxSupply);
+      TNetContainer.setTotalSupply(totalSupply().add(_amount));
+      TNetContainer.setBalanceOf(_account, TNetContainer.balanceOf(_account).add(_amount));
+      emit Transfer(address(0), _account, _amount);
+   }
 
 
+   function _burn(address _account, uint256 _amount) internal {
+      require(_account != 0);
+      require(_amount <= TNetContainer.balanceOf(_account);
+
+      TNetContainer.setTotalSupply(totalSupply().sub(_amount));
+      TNetContainer.setBalanceOf(_account, TNetContainer.balanceOf(_account).sub(_amount));
+
+      emit Transfer(_account, address(0), _amount);
+   }
 
 
 
