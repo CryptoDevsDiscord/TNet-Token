@@ -23,7 +23,7 @@ contract TNetToken is ERC20 {
       -balanceOf();
       -allowance();
       -setBalanceOf(address _owner, uint256 _value); (onlyTNetToken modifier)
-      -setAllowed(address _owner, address _spender, uint256 _value)
+      -setAllowance(address _owner, address _spender, uint256 _value)
       -allowed(address _owner, address _spender)
    */
 
@@ -60,7 +60,7 @@ contract TNetToken is ERC20 {
       require(_spender != address(0));
 
       //allowed[msg.sender][_spender] = _value;
-      TNetContainer.setAllowed(msg.sender, _spender, _value);
+      TNetContainer.setAllowance(msg.sender, _spender, _value);
       emit Approval(msg.sender, _spender, _value);
       return true;
    }
@@ -77,7 +77,7 @@ contract TNetToken is ERC20 {
 
       TNetContainer.setBalanceOf(_from, balanceFrom.sub(_value));
       TNetContainer.setBalanceOf(_to, balanceTo.add(_value);
-      TNetContainer.setAllowed(_from, msg.sender, TNetContainer.allowance(_from, msg.sender).sub(_value);
+      TNetContainer.setAllowance(_from, msg.sender, TNetContainer.allowance(_from, msg.sender).sub(_value);
       emit Transfer(_from, _to, _value);
       return true;
    }
