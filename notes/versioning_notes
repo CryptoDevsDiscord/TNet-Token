@@ -1,0 +1,78 @@
+Versioning Notes (Semantic Versioning, etc.)
+---------------------------------------------
+
+-Semver (Semantic Versioning)
+   -https://semver.org/
+   -Version numbers which correspond to a specific kind of change in the version
+   -Syntax: MAJOR.MINOR.PATCH (1)
+
+
+   -Summary:
+      -MAJOR is incremented when you make breaking API changes (2)
+      -MINOR is incremented when you add new functionality without breaking the existing API or functionality
+      -PATCH is incremented when you make backwards-compatible bug fixes
+
+
+   -Version 0 (0.y.z) is reserved for initial development (1)
+      -Allows for flexibility in an environment when anything and everything is in flux, fast-paced development
+
+   -Initial dev release suggested at 0.1.0 (FAQ)
+   -Version 1.0.0 is for a solid, production-ready version
+      -"Defines the public API"
+      -1.0.0 should be defined upon deployment to production
+         -Especially if used en masse!!! (2)
+
+   -Public API is defined as... anything that needs documentation? (?)
+
+   -Additional labels (like alpha/beta) are ok:
+      -Ex: 1.0.0-alpha.1, 1.0.0-alpha.2
+         -Can be useful for providing a test "intermediary" before finally releasing 1.0.0
+
+   -Rules:
+      -Public API in documentation MUST be precise and fully defined
+
+
+   -Advantages:
+
+      -Formally defined versioning 
+         -Allows for clear and universal understanding of the differences between released versions
+         -Understanding of bug fixes vs. changes which break previous versions (significant changes)
+ 
+      -Reliable stability for userbase
+
+      -No dependency hell!
+         -Knowing that all versions between x.y.z (where x.y.z is the version supproted by program) and x+1.0.0 are fully backwards compatible allows you to set a solid definition of which dependencies are supported
+
+
+   -Appendix:
+      -Warning against strict SemVer (in favor of flexibility): (3)
+
+=========================================================
+
+
+-Alpha/Beta Versioning
+
+   -Origins from IBM (Wikipedia, no citation though lol)
+   -Pre-alpha/alpha/beta (4)
+
+   -Summary:
+
+      -Pre-Alpha: Active development (4)
+         -not feature complete
+
+      -Alpha: Ready for Internal testing 
+         -Fairly complete at this stage (complete enough for internal testing)
+      
+      -Beta: Ready for External testing
+         
+
+
+
+Sources:
+--------
+1. https://semver.org/
+2. https://embeddedartistry.com/blog/2017/12/7/start-using-semantic-versioning-to-give-your-version-numbers-meaning
+3. https://gist.github.com/jashkenas/cbd2b088e20279ae2c8e
+4. https://blog.codinghorror.com/alpha-beta-and-sometimes-gamma/
+
+
