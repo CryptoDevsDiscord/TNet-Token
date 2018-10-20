@@ -23,6 +23,8 @@ contract TNetToken is ERC20 {
       -balanceOf();
       -allowance();
       -setBalanceOf(address _owner, uint256 _value); (onlyTNetToken modifier)
+      -setAllowed(address _owner, address _spender, uint256 _value)
+      -allowed(address _owner, address _spender)
    */
 
    /* ERC20 TOKEN STANDARD FUNCTION OVERRIDES */
@@ -51,7 +53,30 @@ contract TNetToken is ERC20 {
       return true;
    }
 
+   function approve(address _spender, uint256 _value) public returns (bool) {
+      require(_spender != address(0));
 
+      //allowed[msg.sender][_spender] = _value;
+      TNetContainer.setAllowed(msg.sender, _spender, _value);
+      emit Approval(msg.sender, _spender, _value);
+      return true;
+   }
+
+   function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
+      balanceFrom = TNetContainer.balanceOf(_from);
+      balanceTo = TNetContainer.balanceOf(_to);
+
+      require(_value <= balanceFrom);
+      //require(_value <= allowed[_from][msg.sender]); I wonder if a contract can get a mapping...? It'd probably be too expensive
+      require(_value <= TNetContainer.allowed(_from, msg.sender);
+      require(_to != address(0));
+
+      TNetContainer.setBalanceOf(_from, balanceFrom.sub(_value));
+      TNetContainer.setBalanceOf(_to, balanceTo.add(_value);
+      TNetContainer.setAllowed(_from, msg.sender, TNetContainer.allowed(_from, msg.sender).sub(_value);
+      emit Transfer(_from, _to, _value);
+      return true;
+   }
 
 
 
