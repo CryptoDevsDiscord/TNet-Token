@@ -27,7 +27,9 @@ contract TNetToken is ERC20 {
       -allowed(address _owner, address _spender)
    */
 
-   /* ERC20 TOKEN STANDARD FUNCTION OVERRIDES */
+
+
+   /* --------------- ERC20 TOKEN STANDARD FUNCTION OVERRIDES --------------- */
 
    function totalSupply() public view returns (uint256) {
       return TNetContainer.totalSupply();
@@ -118,8 +120,16 @@ contract TNetToken is ERC20 {
       emit Transfer(_account, address(0), _amount);
    }
 
+   function _burnFrom(address _account, uint256 _amount) internal {
+      require(_amount <= TNetContainer.allowance(_account, msg.sender));
 
+      // Should https://github.com/OpenZeppelin/zeppelin-solidity/issues/707 be accepted,
+      // this function needs to emit an event with the updated approval.
+      TNetContainer.setAllowance(_account, msg.sender, TNetContainer.allowance(_account, msg.sender).sub(_amount));
+      _burn(_account, _amount);
+   }
 
+/* --------------- ERC20 OVERRIDES END --------------- */
 
    function setupTNetContainer(address _addr) internal {
       TNetTokenContainerAddress = _addr;
