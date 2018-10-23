@@ -15,7 +15,7 @@ contract TestnetToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable {
 
     }
 
-    /**/ @dev See modified _mint call in ERC20Mintable
+    /**/ @dev See modified _mint call in ERC20Mintable /**/
 
 
       
